@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>ProductController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ProductController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">tech</span><span class="s2">.</span><span class="s1">speedrun</span><span class="s2">.</span><span class="s1">controller</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">tech</span><span class="s2">.</span><span class="s1">speedrun</span><span class="s2">.</span><span class="s1">entity</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">web</span><span class="s2">.</span><span class="s1">bind</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">PostMapping</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">web</span><span class="s2">.</span><span class="s1">bind</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">RequestBody</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">web</span><span class="s2">.</span><span class="s1">bind</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">RestController</span><span class="s2">;</span>
+
+
+<span class="s1">@RestController</span>
+
+<span class="s0">public class </span><span class="s1">ProductController </span><span class="s2">{</span>
+
+    <span class="s0">private final </span><span class="s1">ProductService productService</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">ProductController </span><span class="s2">(</span><span class="s1">ProductService productService</span><span class="s2">) {</span>
+
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">productService </span><span class="s2">= </span><span class="s1">productService</span><span class="s2">;</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@PostMapping</span><span class="s2">(</span><span class="s3">&quot;/products&quot;</span><span class="s2">)</span>
+
+    <span class="s0">public </span><span class="s1">Product createProduct</span><span class="s2">(</span><span class="s1">@RequestBody Product product</span><span class="s2">) {</span>
+
+        <span class="s0">return this</span><span class="s2">.</span><span class="s1">productService</span><span class="s2">.</span><span class="s1">createProduct </span><span class="s2">(</span><span class="s1">product</span><span class="s2">);</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@GetMapping</span><span class="s2">(</span><span class="s3">&quot;/products/{id}&quot;</span><span class="s2">)</span>
+
+    <span class="s0">public </span><span class="s1">Product getProductById</span><span class="s2">(</span><span class="s1">@PathVariable Long id</span><span class="s2">){</span>
+
+        <span class="s0">return this</span><span class="s2">.</span><span class="s1">productService</span><span class="s2">.</span><span class="s1">getProductById</span><span class="s2">(</span><span class="s1">id</span><span class="s2">);</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@GetMapping</span><span class="s2">(</span><span class="s3">&quot;/products&quot;</span><span class="s2">)</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">&gt; </span><span class="s1">getAllProducts </span><span class="s2">(</span><span class="s1">@RequestParam</span><span class="s2">(</span><span class="s1">required </span><span class="s2">= </span><span class="s0">false</span><span class="s2">, </span><span class="s1">defaultValue </span><span class="s2">= </span><span class="s3">&quot;&quot;</span><span class="s2">) </span><span class="s1">String name</span><span class="s2">, </span><span class="s1">@RequestParam</span><span class="s2">(</span><span class="s1">required </span><span class="s2">= </span><span class="s0">false</span><span class="s2">, </span><span class="s1">defaultValue </span><span class="s2">= </span><span class="s3">&quot;&quot;</span><span class="s2">) </span><span class="s1">String category</span><span class="s2">){</span>
+
+        <span class="s0">return this</span><span class="s2">.</span><span class="s1">productService</span><span class="s2">.</span><span class="s1">findAllProducts </span><span class="s2">(</span><span class="s1">name</span><span class="s2">, </span><span class="s1">category</span><span class="s2">);</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@PutMapping</span><span class="s2">(</span><span class="s3">&quot;/products/{id}&quot;</span><span class="s2">)</span>
+
+    <span class="s0">public </span><span class="s1">Product editProductById</span><span class="s2">(</span><span class="s1">@PathVariable Long id</span><span class="s2">, </span><span class="s1">@RequestBody Product dataToEdit</span><span class="s2">){</span>
+
+        <span class="s0">return this</span><span class="s2">.</span><span class="s1">productService</span><span class="s2">.</span><span class="s1">editProductById</span><span class="s2">(</span><span class="s1">id</span><span class="s2">, </span><span class="s1">dataToEdit</span><span class="s2">);</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@DeleteMapping</span><span class="s2">(</span><span class="s3">&quot;/products/{id}&quot;</span><span class="s2">)</span>
+
+    <span class="s0">public </span><span class="s1">Product deleteProductById</span><span class="s2">(</span><span class="s1">@PathVariable Long id</span><span class="s2">) {</span>
+
+        <span class="s0">return this</span><span class="s2">.</span><span class="s1">productService</span><span class="s2">.</span><span class="s1">deleteProductById</span><span class="s2">(</span><span class="s1">id</span><span class="s2">);</span>
+
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>
