@@ -40,7 +40,8 @@ NOTA:
 
 Edición Completa: el método del Servicio "editProductById" verifica campo por campo (name, description, price, stock, category). Si el dato viene en el JSON, lo actualiza; si no, deja el original.
 
-Manejo de Errores (Try-Catch): bloques try-catch implementados en el Controlador. Si se intenta crear un producto con precio negativo (que validé en el servicio), el sistema no explota con un error 500 feo, sino que atrapa la excepción y devuelve un mensaje claro al usuario (Error 400).
+Manejo de Errores (Try-Catch): bloques try-catch implementados en el Controlador. Si se intenta crear un producto con precio negativo (que validé en el servicio), el sistema no cae en un error 500 feo, sino que atrapa la excepción y devuelve un mensaje claro al usuario (Error 400).
+
 
 
 
